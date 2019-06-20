@@ -1,0 +1,46 @@
+﻿
+@model List<TheMovieDB.Models.MoviesListViewModel>
+
+@{
+    ViewBag.Title = "Latest Movies";
+}
+
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">List Of Latest Movies (Near You)</h3>
+        </div>
+
+
+        <div class="panel-body">
+            <div class="table table-bordered table-striped">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Movie Name</th>
+                            <th>Release Date</th>
+                            <th>Langauge</th>
+                            <ht></ht>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                       
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.MovieName</td>
+                            <td>@item.ReleaseDate</td>
+                            <td>@item.Langauge</td>
+                            <td>@Html.ActionLink("Detials", "GetMovieDetails", new { id = item.MovieID, source = "list" })</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+

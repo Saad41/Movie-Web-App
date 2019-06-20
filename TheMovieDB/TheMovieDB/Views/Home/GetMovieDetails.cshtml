@@ -1,0 +1,65 @@
+﻿@model  TheMovieDB.Models.MovieDetailViewModel
+
+@{
+    ViewBag.Title = "Movie Details";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="panel-body">
+            <div class="text-center">
+                @if (Model.Poster == "")
+                {
+                    <label>No Poster Available</label>
+                }
+                else
+                {
+                    <img src=https://image.tmdb.org/t/p/w500/@Model.Poster alt="@Model.MovieName" />
+                }
+
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Movie Name</th>
+                            <th>Movie Description</th>
+                            <th>Genre</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.MovieName</td>
+                            <td>@Model.MovideDescription</td>
+                            <td>@Model.Genres</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @{
+                string source = ViewBag.ReturnSource;
+                if (source == "favorites")
+                {
+                    @Html.ActionLink("Return To Favorites", "FavoritesList", "Home")
+                }
+                else if (source == "search")
+                {
+                    @Ajax.ActionLink("Return To Search", "Search", "Home", new { Title = ViewBag.SearchString.ToString() }, new AjaxOptions { HttpMethod = "Post" })
+                }
+                else if (source == "list")
+                {
+                    @Html.ActionLink("Return To Latest Movie List", "Index", "Home")
+                }
+            }
+
+            @section scripts{
+                @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
